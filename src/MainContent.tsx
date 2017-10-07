@@ -1,5 +1,6 @@
 import * as React from 'react';
 import Paper from 'material-ui/Paper';
+import MyChart from './MyChart';
 
 interface MainContentProps {}
 
@@ -7,9 +8,11 @@ const MainContent: React.SFC<MainContentProps> = props => {
   return (
     <Paper zDepth={2} style={{ minHeight: '200px' }}>
       <div>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed quisquam vitae numquam perspiciatis eius magni
-        molestiae natus voluptate amet qui. Quam, consectetur voluptatum aut dolore distinctio iste voluptatibus
-        dolorum. Ipsa.
+        <MyChart
+          data={{
+            columns: [['data1', 30, 200, 10, 400, 150, 250], ['data2', 50, 20, 250, 40, 15, 25]]
+          }}
+        />
       </div>
     </Paper>
   );
