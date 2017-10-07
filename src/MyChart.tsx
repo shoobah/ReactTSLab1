@@ -3,7 +3,7 @@ import Paper from 'material-ui/Paper';
 import * as C3 from 'c3';
 
 interface MyChartProps {
-  data: C3.Data;
+  data: {};
 }
 
 interface MyChartState {}
@@ -12,10 +12,20 @@ class MyChart extends React.Component<MyChartProps, MyChartState> {
   chart: C3.ChartAPI;
 
   componentDidMount() {
-    this.chart = C3.generate({
-      bindto: '#chart',
-      data: this.props.data
-    });
+    if (Object.keys(this.props.data).length === 0 && this.props.data.constructor === Object) {
+      return;
+    }
+    this.generate(this.props.data);
+  }
+
+  componentWillReceiveProps(nextProps: MyChartProps) {
+    if (nextProps.data !== this.props.data) {
+      if (!this.chart) {
+        this.generate(nextProps.data);
+      }
+      this.chart.unload();
+      this.chart.load(nextProps.data);
+    }
   }
 
   render() {
@@ -24,6 +34,13 @@ class MyChart extends React.Component<MyChartProps, MyChartState> {
         <div id="chart" />
       </Paper>
     );
+  }
+
+  private generate(data: {}) {
+    this.chart = C3.generate({
+      bindto: '#chart',
+      data: data
+    });
   }
 }
 

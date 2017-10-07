@@ -4,23 +4,43 @@ import MyChart from './MyChart';
 import RandomData from './RandomData';
 
 interface MainContentProps {}
-const rnd = new RandomData();
-const getData = () => {
-  let d = [];
-  for (let i = 0; i < 5; i++) {
-    d.push(rnd.getRandomData());
-  }
-  return { columns: d };
-};
+interface MainContentState {
+  chartData: {};
+}
 
-const MainContent: React.SFC<MainContentProps> = props => {
-  return (
-    <Paper zDepth={2} style={{ minHeight: '200px' }}>
-      <div>
-        <MyChart data={getData()} />
-      </div>
-    </Paper>
-  );
-};
+class MainContent extends React.Component<MainContentProps, MainContentState> {
+  state = {
+    chartData: {}
+  };
+
+  componentDidMount() {
+    this.getData();
+  }
+
+  render() {
+    return (
+      <Paper zDepth={2} style={{ minHeight: '200px' }}>
+        <div>
+          <button onClick={this.getData}>"Randomize data"</button>
+          <MyChart data={this.state.chartData} />
+        </div>
+      </Paper>
+    );
+  }
+
+  private getData = () => {
+    const rnd = new RandomData();
+    let d = [];
+    for (let i = 0; i < 5; i++) {
+      d.push(rnd.getRandomData());
+    }
+    this.setState({
+      chartData: {
+        columns: d,
+        type: 'spline'
+      }
+    });
+  };
+}
 
 export default MainContent;
