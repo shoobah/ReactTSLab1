@@ -156,9 +156,9 @@ class RandomData {
   getRandomData() {
     let a = [];
     a.push(this.getRandomName());
-    const max = this.rndNum(10, 100);
+    const max = 20;
     for (let i = 0; i < max; i++) {
-      a.push(this.rndNum(10, 400));
+      a.push(this.rndNum(-500, 500));
     }
     return a;
   }
