@@ -23,7 +23,6 @@ class MyChart extends React.Component<MyChartProps, MyChartState> {
       if (!this.chart) {
         this.generate(nextProps.data);
       }
-      this.chart.unload();
       this.chart.load(nextProps.data);
     }
   }

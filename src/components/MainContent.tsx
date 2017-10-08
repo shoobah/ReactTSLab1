@@ -37,7 +37,8 @@ class MainContent extends React.Component<MainContentProps, MainContentState> {
     this.setState({
       chartData: {
         columns: d,
-        type: 'spline'
+        type: 'spline',
+        unload: true
       }
     });
   };
