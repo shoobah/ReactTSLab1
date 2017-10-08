@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Paper from 'material-ui/Paper';
 import MyChart from './MyChart';
-import RandomData from './helpers/RandomData';
+import RandomData from '../helpers/RandomData';
 
 interface MainContentProps {}
 interface MainContentState {
